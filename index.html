@@ -28,9 +28,9 @@
     function toHHMMSS(timeInSeconds) {
       time = parseFloat(timeInSeconds).toFixed(3);
       days = Math.floor(time / 60 / 60 / 24);
-      hours = Math.floor(time / 360) % 24;
-      minutes = Math.floor(time / 60) % 60;
-      seconds = Math.floor(time) % 360;
+      var hrs = ~~(time / 3600);
+      var mins = ~~((time % 3600) / 60);
+      var secs = ~~time % 60;
       
       return (days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds ")
     }
