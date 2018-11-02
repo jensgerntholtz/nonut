@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" />
+</head>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    background: black;
+  }
+  h1 {
+    color: white;
+  }
+</style>
+<body>
+  <h1 id="counter"></h1>
+
+  <script>
+    function toHHMMSS(timeInSeconds) {
+      time = parseFloat(timeInSeconds).toFixed(3);
+      days = Math.floor(time / 60 / 60 / 24);
+      hours = Math.floor(time / 360) % 24;
+      minutes = Math.floor(time / 60) % 60;
+      seconds = Math.floor(time) % 360;
+      
+      return (days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds ")
+    }
+
+    function datediff(datepart, fromdate, todate) {
+      datepart = datepart.toLowerCase();
+      var diff = todate - fromdate;
+      var divideBy = {
+        w: 604800000,
+        d: 86400000,
+        h: 3600000,
+        n: 60000,
+        s: 1000
+      };
+
+      return Math.floor(diff / divideBy[datepart]);
+    }
+    var bDate = new Date(2018, 9, 31);
+    var eDate = new Date(2018, 10, 30);
+    var today = new Date();
+    var elapsedSince = datediff('s', bDate, today);
+    var title = document.getElementById('counter');
+    setInterval(function () {
+      today = new Date();
+      elapsedSince = datediff('s', bDate, today);
+      title.innerHTML = toHHMMSS(datediff('s', bDate, today));
+    }, 1000)
+  </script>
+</body>
+
+</html>
